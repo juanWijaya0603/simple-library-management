@@ -17,7 +17,7 @@ include 'database.php'; // Koneksi ke database
         <h3>Login Page</h3>
         <form class="credentials" action="login.php" method="POST">
             <label>username:</label><br>
-            <input type="text" class="username" name="username" value="."><br>
+            <input type="text" class="username" name="username" value="empty"><br>
             <label >password:</label><br>
             <input type="password" class="password" name="password" value=""><br><br>
             <input class="button-submit" type="submit" value="Submit">
@@ -35,7 +35,6 @@ if (empty($username) || empty($password) )
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $hash_password = password_hash($password, PASSWORD_BCRYPT);
 
     // Cari pengguna berdasarkan username
     $stmt = $pdo->prepare("SELECT * FROM Users WHERE username = ?");
