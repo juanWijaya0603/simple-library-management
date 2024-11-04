@@ -1,6 +1,6 @@
 <?php
 // Database configuration
-$host = '127.0.0.1';         // Database host, e.g., '127.0.0.1' or 'localhost'
+$host = 'localhost';         // Database host, e.g., '127.0.0.1' or 'localhost'
 $db   = 'librarymanagement'; // Name of your database
 $user = 'root';      // Your database username
 $pass = '';      // Your database password
