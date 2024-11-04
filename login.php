@@ -17,7 +17,7 @@ include 'database.php'; // Koneksi ke database
         <h3>Login Page</h3>
         <form class="credentials" action="login.php" method="POST">
             <label>username:</label><br>
-            <input type="text" class="username" name="username" value="empty"><br>
+            <input type="text" class="username" name="username" value=""><br>
             <label >password:</label><br>
             <input type="password" class="password" name="password" value=""><br><br>
             <input class="button-submit" type="submit" value="Submit">
