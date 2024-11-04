@@ -9,7 +9,7 @@
 <body>
     <div class="login-card">            
         <h3>Login Page</h3>
-        <form class="credentials" action="index.php" method="POST">
+        <form class="credentials" action="login.php" method="POST">
             <label>username:</label><br>
             <input type="text" class="username" name="username" value=""><br>
             <label >password:</label><br>
