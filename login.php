@@ -7,35 +7,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Check if fields are empty
-    if (empty($username) || empty($password)) {
-        echo '<script>alert("Username atau password tidak boleh kosong.")</script>';
-    } else {
-        // Search for the user by username
-        $stmt = $pdo->prepare("SELECT * FROM Users WHERE username = ?");
-        $stmt->execute([$username]);
-        $user = $stmt->fetch();
 
-        // Verify the password
-        if ($user && password_verify($password, $user['password_hash'])) {
-            // Set session variables
-            $_SESSION['user_id'] = $user['user_id'];
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['role'] = $user['role'];
+    $sql = "SELECT * FROM users WHERE username = '$username'";
+    $result = $conn->query($sql);
 
-            // Redirect based on role
-            if ($user['role'] == 'admin') {
-                header("Location: /admin_dashboard.php");
-            } elseif ($user['role'] == 'librarian') {
-                header("Location: /librarian_dashboard.php");
-            } else {
-                header("Location: /member_dashboard.php");
-            }
-            exit;
-        } else {
-            echo '<script>alert("Username atau password salah.")</script>';
+    $row = $result->fetch_assoc();
+    if ($result->num_rows > 0) {
+        if(password_verify($password, $row['password_hash'])){
+            echo '<script>alert("berhasil")</script>';
+
         }
-    }
+    } else {
+        echo '<script>alert("username tidak terdaftar")</script>';
+      }
 }
 ?>
 
@@ -56,6 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <label>password:</label><br>
             <input type="password" class="password" name="password" value=""><br><br>
             <input class="button-submit" type="submit" value="Submit">
+            <?php
+                if (empty($username) || empty($password)) {
+                    echo '<script>alert("Username atau password tidak boleh kosong.")</script>';
+                }
+            ?>
         </form>   
     </div>
 </body>
